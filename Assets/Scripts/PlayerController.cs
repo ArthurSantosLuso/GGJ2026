@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
 
+    [SerializeField]
+    private Shooting shootingScript;
+
     private CharacterController controller;
     private PlayerAnimHandler playerAnimHandler;
     private Vector2 moveInput;
@@ -38,8 +41,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            shootingScript.Shoot();
             Debug.Log($"{Time.time}: Player Attacked {context.phase}");
             playerAnimHandler.AttackAnim();
+            
         }
     }
 
