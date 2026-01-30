@@ -32,15 +32,15 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private BulletType currentBullet = BulletType.Fire;
 
-    void Update()
-    {
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
-        {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
-        }
+    //void Update()
+    //{
+    //    if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+    //    {
+    //        Shoot();
+    //        nextFireTime = Time.time + fireRate;
+    //    }
 
-    }
+    //}
 
     void Shoot()
     {
