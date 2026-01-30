@@ -44,18 +44,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Attack",
                     "type": "Button",
-                    "id": "4956d886-b3d1-418e-bfa6-d79fb0d1dceb",
+                    "id": "72db1125-cd33-4043-9b82-d0b349f152ce",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "Run",
                     "type": "Button",
-                    "id": "72db1125-cd33-4043-9b82-d0b349f152ce",
+                    "id": "11b3c0c1-d690-4254-a496-ac5d61f09039",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "4b0c5cb8-9356-4abf-b7df-633c5334b36b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -120,23 +129,34 @@
                 },
                 {
                     "name": "",
-                    "id": "be93c712-8daa-4f79-9e3e-4641d20db82d",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "09061aea-bdfa-4570-bc9e-5bc4ecb7c3f3",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc258921-fe56-4e86-b6fd-960b0705011a",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afa0dab8-5e82-46d4-a29f-cb1b5b80fc09",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -18,4 +18,9 @@ public class PlayerAnimHandler : MonoBehaviour
     {
         animator.SetTrigger("attack");
     }
+
+    public void SetRunAnim(bool value)
+    {
+        animator.SetBool("isRunning", value);
+    }
 }

@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool shouldFaceMoveDir;
 
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float runSpeed = 10f;
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
 
@@ -17,9 +18,13 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimHandler playerAnimHandler;
     private Vector2 moveInput;
     private Vector3 velocity;
+    private float speed;
+    private bool isRunning;
 
     void Start()
     {
+        isRunning = false;
+        speed = moveSpeed;
         controller = GetComponent<CharacterController>();
         playerAnimHandler = GetComponent<PlayerAnimHandler>();
     }
@@ -29,20 +34,30 @@ public class PlayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.performed && controller.isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-    }
-
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
             Debug.Log($"{Time.time}: Player Attacked {context.phase}");
             playerAnimHandler.AttackAnim();
+        }
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            ChangeMoveSpeed();
+            playerAnimHandler.SetRunAnim(isRunning);
+        }
+    }
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            // Implement
+            Debug.Log("Aiming");
         }
     }
 
@@ -71,7 +86,19 @@ public class PlayerController : MonoBehaviour
         // deals with jumping
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
 
-
+    private void ChangeMoveSpeed()
+    {
+        if (isRunning)
+        {
+            speed = moveSpeed;
+            isRunning = false;
+        }
+        else
+        {
+            speed = runSpeed;
+            isRunning= true;
+        }
     }
 }
