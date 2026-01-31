@@ -1796,12 +1796,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2190104211456494143}
   - component: {fileID: 7935997872282582634}
-  - component: {fileID: 1978759784441263273}
   - component: {fileID: 4831734815884601554}
   - component: {fileID: 1246655187481635509}
   - component: {fileID: 1924414835205138532}
-  - component: {fileID: 5208441089989859558}
   - component: {fileID: 6103296508220661477}
+  - component: {fileID: 4805992970287906037}
+  - component: {fileID: 2658422601393212825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1851,27 +1851,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1978759784441263273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210471562639040666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b706842ba918cf641b8e211b71562ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  shouldFaceMoveDir: 1
-  runSpeed: 10
-  moveSpeed: 5
-  jumpHeight: 2
-  gravity: -9.8
-  shootingScript: {fileID: 5208441089989859558}
-  aimRotationSpeed: 15
-  cam: {fileID: 0}
-  aimFocusPoint: {fileID: 4474875439926914893}
 --- !u!143 &4831734815884601554
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1928,7 +1907,7 @@ MonoBehaviour:
     m_ActionName: 'CameraControls/MouseZoom[/Mouse/scroll]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1978759784441263273}
+      - m_Target: {fileID: 4805992970287906037}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -1944,7 +1923,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1978759784441263273}
+      - m_Target: {fileID: 4805992970287906037}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
@@ -1960,7 +1939,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1978759784441263273}
+      - m_Target: {fileID: 4805992970287906037}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnRun
         m_Mode: 0
@@ -1976,7 +1955,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Run[/Keyboard/shift]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1978759784441263273}
+      - m_Target: {fileID: 4805992970287906037}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnAim
         m_Mode: 0
@@ -2007,34 +1986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea60067137789c54c8952b7347aa7c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimHandler
---- !u!114 &5208441089989859558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210471562639040666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08160d43bc2d04542ba752102a951e6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shooting
-  firePoint: {fileID: 8394046189484237464}
-  fireBullet: {fileID: 5029179038630605135, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
-  poisonBullet: {fileID: 5029179038630605135, guid: 82778656c66dff44e86afdf8c1dd7266, type: 3}
-  slowBullet: {fileID: 5029179038630605135, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}
-  bulletSpeed: 20
-  fireRate: 0.2
-  viewAngle: 45
-  viewDistance: 30
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  obstructionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerTransform: {fileID: 2190104211456494143}
-  currentBullet: 0
 --- !u!114 &6103296508220661477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2047,6 +1998,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a39486b2326d94aa9fce4d85a2d938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectManager
+--- !u!114 &4805992970287906037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210471562639040666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fdfb3dfd793bea479fc5d6f0da9a00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  shouldFaceMoveDir: 1
+  runSpeed: 10
+  moveSpeed: 5
+  jumpHeight: 2
+  gravity: -9.8
+  shootingScript: {fileID: 2658422601393212825}
+  aimRotationSpeed: 15
+  cam: {fileID: 0}
+  aimFocusPoint: {fileID: 4474875439926914893}
+--- !u!114 &2658422601393212825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210471562639040666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a32bef8349f6f4fafd7022d965e70f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shooting
+  firePoint: {fileID: 2422673152360224897}
+  fireBullet: {fileID: 5029179038630605135, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
+  poisonBullet: {fileID: 5029179038630605135, guid: 82778656c66dff44e86afdf8c1dd7266, type: 3}
+  slowBullet: {fileID: 5029179038630605135, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}
+  bulletSpeed: 40
+  fireRate: 0.2
+  viewAngle: 45
+  viewDistance: 30
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  maxAmmo: 10
+  reloadTime: 2
+  isReloading: 0
+  playerTransform: {fileID: 2190104211456494143}
+  currentBullet: 0
 --- !u!1 &6473884378706711715
 GameObject:
   m_ObjectHideFlags: 0

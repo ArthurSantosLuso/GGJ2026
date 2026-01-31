@@ -468,6 +468,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4805992970287906037, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1290141929}
     - target: {fileID: 6210471562639040666, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -880,9 +884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ded288e2203564f9331a1f1492125b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  maxHealth: 100
-  moveSpeed: 5
-  bar: {fileID: 0}
 --- !u!1 &2071407364
 GameObject:
   m_ObjectHideFlags: 0
