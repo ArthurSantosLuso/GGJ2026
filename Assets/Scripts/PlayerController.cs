@@ -60,10 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            shootingScript.Shoot();
-            Debug.Log($"{Time.time}: Player Attacked {context.phase}");
             playerAnimHandler.AttackAnim();
-            
         }
     }
 

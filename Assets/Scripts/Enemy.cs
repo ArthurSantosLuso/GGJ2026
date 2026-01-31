@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        SetBarAmount();
+        //SetBarAmount();
         if (currentHealth <= 0f)
         {
             Die();

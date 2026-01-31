@@ -816,6 +816,37 @@ Transform:
   - {fileID: 1694641185827917470}
   m_Father: {fileID: 4001507006787957340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3764525850026172480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4474875439926914893}
+  m_Layer: 0
+  m_Name: AimPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4474875439926914893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764525850026172480}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7582, y: 1.057, z: 1.19869}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2190104211456494143}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3945009863976490542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,8 +1623,9 @@ GameObject:
   - component: {fileID: 4831734815884601554}
   - component: {fileID: 1246655187481635509}
   - component: {fileID: 1924414835205138532}
+  - component: {fileID: 5208441089989859558}
   m_Layer: 0
-  m_Name: Player_Diogo
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1612,6 +1644,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4474875439926914893}
   - {fileID: 2508841682346006977}
   - {fileID: 3765824831700841012}
   - {fileID: 266351796186107804}
@@ -1651,12 +1684,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b706842ba918cf641b8e211b71562ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  cameraTransform: {fileID: 0}
   shouldFaceMoveDir: 1
   runSpeed: 10
   moveSpeed: 5
   jumpHeight: 2
   gravity: -9.8
+  shootingScript: {fileID: 5208441089989859558}
+  aimRotationSpeed: 15
+  cam: {fileID: 0}
+  aimFocusPoint: {fileID: 4474875439926914893}
 --- !u!143 &4831734815884601554
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1792,6 +1828,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea60067137789c54c8952b7347aa7c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimHandler
+--- !u!114 &5208441089989859558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210471562639040666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08160d43bc2d04542ba752102a951e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shooting
+  firePoint: {fileID: 0}
+  fireBullet: {fileID: 5029179038630605135, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
+  poisonBullet: {fileID: 5029179038630605135, guid: 82778656c66dff44e86afdf8c1dd7266, type: 3}
+  slowBullet: {fileID: 5029179038630605135, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}
+  bulletSpeed: 40
+  fireRate: 0.2
+  currentBullet: 0
 --- !u!1 &6473884378706711715
 GameObject:
   m_ObjectHideFlags: 0
