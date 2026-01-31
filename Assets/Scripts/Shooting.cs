@@ -27,6 +27,13 @@ public class Shooting : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask obstructionLayer;
 
+    [Header("Ammo Settings")]
+    [SerializeField] private int maxAmmo = 10;       // Max bullets before reload
+    [SerializeField] private float reloadTime = 2f;  // Reload animation duration
+
+    private int currentAmmo;
+    public bool isReloading = false;
+
     private float nextFireTime;
 
     [SerializeField] private Transform playerTransform;
@@ -41,8 +48,22 @@ public class Shooting : MonoBehaviour
     [SerializeField]
     private BulletType currentBullet = BulletType.Fire;
 
+    private void Awake()
+    {
+        currentAmmo = maxAmmo;
+    }
+
     public void Shoot()
     {
+        if (isReloading)
+            return; 
+
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
         if (Time.time < nextFireTime)
             return;
 
@@ -58,8 +79,7 @@ public class Shooting : MonoBehaviour
         if (bulletPrefab == null)
             return;
 
-        Vector3 direction =
-            (target.position - firePoint.position).normalized;
+        Vector3 direction = (target.position - firePoint.position).normalized;
 
         GameObject bullet = Instantiate(
             bulletPrefab,
@@ -69,6 +89,8 @@ public class Shooting : MonoBehaviour
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = direction * bulletSpeed;
+
+        currentAmmo--; 
     }
 
 
@@ -127,6 +149,19 @@ public class Shooting : MonoBehaviour
         }
 
         return closest;
+    }
+
+    private System.Collections.IEnumerator Reload()
+    {
+        isReloading = true;
+
+        Debug.Log("Reloading...");
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+        isReloading = false;
+        Debug.Log("Reloaded!");
     }
 
 

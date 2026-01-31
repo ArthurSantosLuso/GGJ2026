@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            if (shootingScript.isReloading == false) 
             playerAnimHandler.AttackAnim();
         }
     }
