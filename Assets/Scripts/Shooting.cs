@@ -67,6 +67,8 @@ public class Shooting : MonoBehaviour
         if (Time.time < nextFireTime)
             return;
 
+        Debug.Log("Atirei");
+
         nextFireTime = Time.time + fireRate;
 
         Transform target = GetNearestVisibleEnemy();

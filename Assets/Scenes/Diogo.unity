@@ -690,10 +690,6 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 246081182}
-    - target: {fileID: 1978759784441263273, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 2122112191}
     - target: {fileID: 2190104211456494143, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.5
@@ -734,10 +730,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5208441089989859558, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
-      propertyPath: reloadTime
-      value: 4
-      objectReference: {fileID: 0}
+    - target: {fileID: 4805992970287906037, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 2122112191}
     - target: {fileID: 6210471562639040666, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
       propertyPath: m_Name
       value: Player
