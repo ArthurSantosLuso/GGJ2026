@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     public float maxHealth  = 100f;
     public float moveSpeed  = 5f;
+
+    [SerializeField] private Image bar;
 
     private float currentHealth;
 
@@ -15,6 +18,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+        SetBarAmount();
         if (currentHealth <= 0f)
         {
             Die();
@@ -23,7 +27,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+    }
+
+    private void SetBarAmount()
+    {
+        bar.fillAmount = currentHealth;
     }
 
     private void Die()
