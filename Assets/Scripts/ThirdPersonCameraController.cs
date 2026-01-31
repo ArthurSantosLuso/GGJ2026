@@ -5,6 +5,12 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonCameraController : MonoBehaviour
 {
+    [SerializeField] 
+    private float aimZoom = 3f;
+    [SerializeField] 
+    private float mouseSensitivity = 3f;
+
+    [SerializeField]
     private float zoomSpeed = 2f;
     [SerializeField]
     private float zoomLerpSpeed = 10f;
@@ -21,6 +27,10 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private float targetZoom;
     private float currentZoom;
+
+    private bool isAiming;
+    private float yaw;
+
 
     private void Start()
     {
@@ -44,18 +54,36 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (scrollDelta.y != 0)
+        if (!isAiming)
         {
-            if (orbital != null)
+            if (scrollDelta.y != 0)
             {
-                targetZoom = Mathf.Clamp(orbital.Radius - scrollDelta.y * zoomSpeed, minDistante, maxDistante);
-                scrollDelta = Vector2.zero;
-
+                if (orbital != null)
+                {
+                    targetZoom = Mathf.Clamp(orbital.Radius - scrollDelta.y * zoomSpeed, minDistante, maxDistante);
+                    scrollDelta = Vector2.zero;
+                }
             }
+        }
+        else
+        {
+            targetZoom = aimZoom;
         }
 
         currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomLerpSpeed);
         orbital.Radius = currentZoom;
+    }
+
+    public void SetAim(bool aiming)
+    {
+        isAiming = aiming;
+
+        if (isAiming)
+        {
+            targetZoom = aimZoom;
+            currentZoom = aimZoom;
+            orbital.Radius = aimZoom;
+        }
     }
 }
 
