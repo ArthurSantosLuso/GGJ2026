@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     private void SetBarAmount()
     {
-        bar.fillAmount = currentHealth;
+        bar.fillAmount = currentHealth / maxHealth;
     }
 
     private void Die()
