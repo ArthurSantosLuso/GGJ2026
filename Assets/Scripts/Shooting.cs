@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
@@ -32,17 +32,7 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private BulletType currentBullet = BulletType.Fire;
 
-    //void Update()
-    //{
-    //    if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
-    //    {
-    //        Shoot();
-    //        nextFireTime = Time.time + fireRate;
-    //    }
-
-    //}
-
-    void Shoot()
+    public void Shoot()
     {
         GameObject bulletPrefab = GetCurrentBulletPrefab();
         if (bulletPrefab == null) return;

@@ -1,11 +1,10 @@
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private Transform cameraTransform;
     [SerializeField]
     private bool shouldFaceMoveDir;
 
@@ -14,12 +13,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
 
+    [SerializeField]
+    private Shooting shootingScript;
+
     private CharacterController controller;
     private PlayerAnimHandler playerAnimHandler;
+    private Transform cameraTransform;
     private Vector2 moveInput;
     private Vector3 velocity;
     private float speed;
     private bool isRunning;
+
+    private ThirdPersonCameraController cameraController;
+    [SerializeField]
+    private float aimRotationSpeed = 15f;
+
+    [SerializeField]
+    private CinemachineCamera cam;
+    [SerializeField]
+    private Transform aimFocusPoint;
+
+    private Transform originalFocusPoint;
+
+    private bool isAiming;
 
     void Start()
     {
@@ -27,6 +43,12 @@ public class PlayerController : MonoBehaviour
         speed = moveSpeed;
         controller = GetComponent<CharacterController>();
         playerAnimHandler = GetComponent<PlayerAnimHandler>();
+
+        originalFocusPoint = cam.Follow;
+
+        cameraController = cam.GetComponent<ThirdPersonCameraController>();
+        cameraTransform = cam.transform;
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -38,8 +60,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            shootingScript.Shoot();
             Debug.Log($"{Time.time}: Player Attacked {context.phase}");
             playerAnimHandler.AttackAnim();
+            
         }
     }
 
@@ -56,8 +80,14 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            // Implement
-            Debug.Log("Aiming");
+
+            isAiming = !isAiming;
+            shouldFaceMoveDir = !isAiming;
+
+            cam.Follow = isAiming ? aimFocusPoint : originalFocusPoint;
+            cameraController.SetAim(isAiming);
+
+            playerAnimHandler.SetAimAnim(isAiming);
         }
     }
 
@@ -77,7 +107,22 @@ public class PlayerController : MonoBehaviour
 
         playerAnimHandler.SetPlayerMoveValue(moveDir.sqrMagnitude);
 
-        if (shouldFaceMoveDir && moveDir.sqrMagnitude > 0.001f)
+        if (isAiming)
+        {
+            Vector3 camForward = cameraTransform.forward;
+            camForward.y = 0;
+
+            if (camForward.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(camForward);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    aimRotationSpeed * Time.deltaTime
+                );
+            }
+        }
+        else if (shouldFaceMoveDir && moveDir.sqrMagnitude > 0.001f)
         {
             Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10f * Time.deltaTime);
@@ -98,7 +143,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             speed = runSpeed;
-            isRunning= true;
+            isRunning = true;
         }
     }
 }
