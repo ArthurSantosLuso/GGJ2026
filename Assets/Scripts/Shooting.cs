@@ -26,12 +26,10 @@ public class Shooting : MonoBehaviour
     [SerializeField] private float viewDistance = 30f;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask obstructionLayer;
-    [SerializeField] private Transform cameraTransform;
-
 
     private float nextFireTime;
 
-    public GameObject Player;
+    [SerializeField] private Transform playerTransform;
 
     private enum BulletType
     {
@@ -58,7 +56,8 @@ public class Shooting : MonoBehaviour
         if (bulletPrefab == null)
             return;
 
-        Vector3 direction = (target.position - firePoint.position).normalized;
+        Vector3 direction =
+            (target.position - firePoint.position).normalized;
 
         GameObject bullet = Instantiate(
             bulletPrefab,
@@ -66,12 +65,10 @@ public class Shooting : MonoBehaviour
             Quaternion.LookRotation(direction)
         );
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = targetRotation;
-
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.linearVelocity = direction * bulletSpeed;
     }
+
 
     public GameObject GetCurrentBulletPrefab()
     {
@@ -88,43 +85,41 @@ public class Shooting : MonoBehaviour
         return null;
     }
 
-    Transform GetNearestVisibleEnemy()
+    private Transform GetNearestVisibleEnemy()
     {
         Collider[] enemies = Physics.OverlapSphere(
-            transform.position,
+            playerTransform.position,
             viewDistance,
             enemyLayer
         );
 
         Transform closest = null;
-        float minDistance = Mathf.Infinity;
+        float bestScore = -Mathf.Infinity;
 
         foreach (Collider enemy in enemies)
         {
-            Vector3 directionToEnemy =
-                (enemy.transform.position - cameraTransform.position).normalized;
+            Vector3 toEnemy =
+                (enemy.transform.position - playerTransform.position);
 
-            
-            float angle = Vector3.Angle(cameraTransform.forward, directionToEnemy);
+            float distance = toEnemy.magnitude;
+            Vector3 direction = toEnemy.normalized;
+
+            float angle = Vector3.Angle(playerTransform.forward, direction);
             if (angle > viewAngle)
                 continue;
 
-            float distance = Vector3.Distance(
-                cameraTransform.position,
-                enemy.transform.position
-            );
-
-            
             if (Physics.Raycast(
-                    cameraTransform.position,
-                    directionToEnemy,
+                    playerTransform.position + Vector3.up * 1.5f,
+                    direction,
                     distance,
                     obstructionLayer))
                 continue;
 
-            if (distance < minDistance)
+            float dot = Vector3.Dot(playerTransform.forward, direction);
+
+            if (dot > bestScore)
             {
-                minDistance = distance;
+                bestScore = dot;
                 closest = enemy.transform;
             }
         }
@@ -133,22 +128,23 @@ public class Shooting : MonoBehaviour
     }
 
 
+
     private void OnDrawGizmosSelected()
     {
-        if (cameraTransform == null)
+        if (playerTransform == null)
             return;
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, viewDistance);
+        Gizmos.DrawWireSphere(playerTransform.position, viewDistance);
 
-        Vector3 leftLimit =
-            Quaternion.Euler(0, -viewAngle, 0) * cameraTransform.forward;
-        Vector3 rightLimit =
-            Quaternion.Euler(0, viewAngle, 0) * cameraTransform.forward;
+        Vector3 left =
+            Quaternion.Euler(0, -viewAngle, 0) * playerTransform.forward;
+        Vector3 right =
+            Quaternion.Euler(0, viewAngle, 0) * playerTransform.forward;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(cameraTransform.position, leftLimit * viewDistance);
-        Gizmos.DrawRay(cameraTransform.position, rightLimit * viewDistance);
+        Gizmos.DrawRay(playerTransform.position, left * viewDistance);
+        Gizmos.DrawRay(playerTransform.position, right * viewDistance);
     }
 
 }
