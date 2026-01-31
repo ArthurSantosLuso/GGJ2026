@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BulletTrailTestMat - Orange
+  m_Name: BulletTrailTestMat - IceLightBlue
   m_Shader: {fileID: -6465566751694194690, guid: 6e85b26051d92a247bc981953a55dadc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -53,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 89dc4e7bca4d8da479c9071205c4b285, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8e02eb3e294f9d5478a09625175442d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -123,8 +123,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorValue_1: {r: 0.6513099, g: 0, b: 3.9999995, a: 1}
-    - _ColorValue_2: {r: 0.033867106, g: 0.58251154, b: 0, a: 1}
+    - _ColorValue_1: {r: 0.69803923, g: 0.94959205, b: 1, a: 1}
+    - _ColorValue_2: {r: 0, g: 76.62575, b: 85.445015, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Speed: {r: -0.22, g: 0, b: 0, a: 0}
