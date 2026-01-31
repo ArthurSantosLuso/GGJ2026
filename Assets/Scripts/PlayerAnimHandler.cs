@@ -23,4 +23,20 @@ public class PlayerAnimHandler : MonoBehaviour
     {
         animator.SetBool("isRunning", value);
     }
+
+    public void SetAimAnim(bool value)
+    {
+        if (value == true)
+        {
+            animator.SetLayerWeight(animator.GetLayerIndex("Arms Layer"), 1f);
+            animator.SetLayerWeight(animator.GetLayerIndex("Top Layer"), 0.5f);
+        }
+        else
+        {
+            animator.SetLayerWeight(animator.GetLayerIndex("Arms Layer"), 0f);
+            animator.SetLayerWeight(animator.GetLayerIndex("Top Layer"), 1f);
+        }
+
+        animator.SetBool("isAiming", value);
+    }
 }
