@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Arthur.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 6730861e20caf394aa91b18bb49916a9
@@ -15,14 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectionScreen.unity
     guid: 6566815c19302f94bae8b0cfed231abc
   - enabled: 1
-    path: Assets/Scenes/Game_lvlFIRE.unity
+    path: Assets/Scenes/Phase_Fire.unity
     guid: 057f986d4315b2d4d97a9aa465c5b40f
   - enabled: 1
-    path: Assets/Scenes/Game_lvlPOISON.unity
-    guid: 83a53180d9f5537488b684b6586cd603
+    path: Assets/Scenes/Phase_Poison.unity
+    guid: b7297e5df3d846f47ac649600532eb26
   - enabled: 1
-    path: Assets/Scenes/Game_lvlICE.unity
-    guid: 53fea9251302c5c4fa55a58592fd786b
+    path: Assets/Scenes/Phase_ICE.unity
+    guid: 5d4841d5e9557e0479a771bd3ea70c83
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
