@@ -14,4 +14,19 @@ public class MenuScript : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void FireScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
+    public void PoisonScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
+    public void IceScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
 }
