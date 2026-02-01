@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
         controller = GetComponent<CharacterController>();
         currentHealth = maxHealth;
 
-        // Garante que o alvo seja o player da cena
         if (target == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -55,7 +54,7 @@ public class Enemy : MonoBehaviour
 
         Vector3 moveDirection = CalculateMovementDirection();
 
-        // Movimento horizontal
+        
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
 
         // Gravidade
@@ -65,7 +64,7 @@ public class Enemy : MonoBehaviour
         verticalVelocity.y += gravity * Time.deltaTime;
         controller.Move(verticalVelocity * Time.deltaTime);
 
-        // Rotação suave para a direção do movimento
+        
         if (moveDirection.sqrMagnitude > 0.001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
@@ -79,15 +78,15 @@ public class Enemy : MonoBehaviour
 
     private Vector3 CalculateMovementDirection()
     {
-        // Direção para o player (plano XZ)
+        
         Vector3 toPlayer = target.position - transform.position;
         toPlayer.y = 0;
         toPlayer.Normalize();
 
-        // Separação entre inimigos
+        
         Vector3 separation = CalculateSeparation();
 
-        // Combinação final
+        
         Vector3 finalDirection = toPlayer + separation;
         finalDirection.y = 0;
 
