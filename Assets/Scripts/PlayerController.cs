@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private bool shouldFaceMoveDir;
+    [SerializeField] private bool shouldFaceMoveDir = true;
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gravity = -9.8f;
+    [SerializeField] private float rotationSpeed = 10f;
 
     [Header("Combat")]
     [SerializeField] private Shooting shootingScript;
@@ -26,15 +27,14 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private PlayerAnimHandler playerAnimHandler;
     private Transform cameraTransform;
-    private ThirdPersonCameraController cameraController;
 
     private Vector2 moveInput;
     private Vector3 velocity;
+    private Vector3 lastMoveDirection;
+
     private float speed;
     private bool isRunning;
     private bool isAiming;
-
-    private Transform originalFocusPoint;
 
     private void Awake()
     {
@@ -47,8 +47,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        originalFocusPoint = cam.Follow;
-        cameraController = cam.GetComponent<ThirdPersonCameraController>();
         cameraTransform = cam.transform;
     }
 
@@ -63,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            if (!shootingScript.isReloading)
+            if (shootingScript == null || !shootingScript.isReloading)
                 playerAnimHandler.AttackAnim();
         }
     }
@@ -72,7 +70,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            ToggleRun();
+            isRunning = !isRunning;
+            speed = isRunning ? runSpeed : moveSpeed;
             playerAnimHandler.SetRunAnim(isRunning);
         }
     }
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour
         {
             isAiming = !isAiming;
             shouldFaceMoveDir = !isAiming;
-
             playerAnimHandler.SetAimAnim(isAiming);
         }
     }
@@ -109,8 +107,11 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         Vector3 moveDir = forward * moveInput.y + right * moveInput.x;
-        controller.Move(moveDir * speed * Time.deltaTime);
 
+        if (moveDir.sqrMagnitude > 0.001f)
+            lastMoveDirection = moveDir.normalized;
+
+        controller.Move(moveDir * speed * Time.deltaTime);
         playerAnimHandler.SetPlayerMoveValue(moveDir.sqrMagnitude);
     }
 
@@ -131,14 +132,13 @@ public class PlayerController : MonoBehaviour
                 );
             }
         }
-        else if (shouldFaceMoveDir && moveInput.sqrMagnitude > 0.001f)
+        else if (shouldFaceMoveDir && lastMoveDirection.sqrMagnitude > 0.001f)
         {
-            Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y);
-            Quaternion toRotation = Quaternion.LookRotation(moveDir);
+            Quaternion toRotation = Quaternion.LookRotation(lastMoveDirection);
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 toRotation,
-                10f * Time.deltaTime
+                rotationSpeed * Time.deltaTime
             );
         }
     }
@@ -150,12 +150,6 @@ public class PlayerController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-    }
-
-    private void ToggleRun()
-    {
-        isRunning = !isRunning;
-        speed = isRunning ? runSpeed : moveSpeed;
     }
 
     #region Damage System
@@ -173,6 +167,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        Debug.Log("Player morreu");
         Destroy(gameObject);
     }
 
