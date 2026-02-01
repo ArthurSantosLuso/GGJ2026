@@ -928,7 +928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474875439926914893}
   m_Layer: 0
-  m_Name: AimPoint
+  m_Name: AimVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1804,7 +1804,7 @@ GameObject:
   - component: {fileID: 2658422601393212825}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2013,9 +2013,9 @@ MonoBehaviour:
   shouldFaceMoveDir: 1
   runSpeed: 10
   moveSpeed: 5
-  jumpHeight: 2
   gravity: -9.8
   shootingScript: {fileID: 2658422601393212825}
+  maxHealth: 100
   aimRotationSpeed: 15
   cam: {fileID: 0}
   aimFocusPoint: {fileID: 4474875439926914893}
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a32bef8349f6f4fafd7022d965e70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooting
-  firePoint: {fileID: 2422673152360224897}
+  firePoint: {fileID: 0}
   fireBullet: {fileID: 5029179038630605135, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
   poisonBullet: {fileID: 5029179038630605135, guid: 82778656c66dff44e86afdf8c1dd7266, type: 3}
   slowBullet: {fileID: 5029179038630605135, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}

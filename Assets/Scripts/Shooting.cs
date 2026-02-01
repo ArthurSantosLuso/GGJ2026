@@ -67,19 +67,13 @@ public class Shooting : MonoBehaviour
         if (Time.time < nextFireTime)
             return;
 
-        Debug.Log("Atirei");
-
         nextFireTime = Time.time + fireRate;
-
-        Transform target = GetNearestVisibleEnemy();
-        if (target == null)
-            return;
 
         GameObject bulletPrefab = GetCurrentBulletPrefab();
         if (bulletPrefab == null)
             return;
 
-        Vector3 direction = (target.position - firePoint.position).normalized;
+        Vector3 direction = firePoint.forward.normalized;
 
         GameObject bullet = Instantiate(
             bulletPrefab,
@@ -107,48 +101,6 @@ public class Shooting : MonoBehaviour
         }
 
         return null;
-    }
-
-    private Transform GetNearestVisibleEnemy()
-    {
-        Collider[] enemies = Physics.OverlapSphere(
-            playerTransform.position,
-            viewDistance,
-            enemyLayer
-        );
-
-        Transform closest = null;
-        float bestScore = -Mathf.Infinity;
-
-        foreach (Collider enemy in enemies)
-        {
-            Vector3 toEnemy =
-                (enemy.transform.position - playerTransform.position);
-
-            float distance = toEnemy.magnitude;
-            Vector3 direction = toEnemy.normalized;
-
-            float angle = Vector3.Angle(playerTransform.forward, direction);
-            if (angle > viewAngle)
-                continue;
-
-            if (Physics.Raycast(
-                    playerTransform.position + Vector3.up * 1.5f,
-                    direction,
-                    distance,
-                    obstructionLayer))
-                continue;
-
-            float dot = Vector3.Dot(playerTransform.forward, direction);
-
-            if (dot > bestScore)
-            {
-                bestScore = dot;
-                closest = enemy.transform;
-            }
-        }
-
-        return closest;
     }
 
     private System.Collections.IEnumerator Reload()

@@ -1,55 +1,58 @@
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private bool shouldFaceMoveDir;
-
+    [Header("Movement")]
+    [SerializeField] private bool shouldFaceMoveDir;
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.8f;
 
-    [SerializeField]
-    private Shooting shootingScript;
+    [Header("Combat")]
+    [SerializeField] private Shooting shootingScript;
+
+    [Header("Health")]
+    [SerializeField] private float maxHealth = 100f;
+    private float currentHealth;
+
+    [Header("Aim")]
+    [SerializeField] private float aimRotationSpeed = 15f;
+    [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private Transform aimFocusPoint;
 
     private CharacterController controller;
     private PlayerAnimHandler playerAnimHandler;
     private Transform cameraTransform;
+    private ThirdPersonCameraController cameraController;
+
     private Vector2 moveInput;
     private Vector3 velocity;
     private float speed;
     private bool isRunning;
-
-    private ThirdPersonCameraController cameraController;
-    [SerializeField]
-    private float aimRotationSpeed = 15f;
-
-    [SerializeField]
-    private CinemachineCamera cam;
-    [SerializeField]
-    private Transform aimFocusPoint;
+    private bool isAiming;
 
     private Transform originalFocusPoint;
 
-    private bool isAiming;
-
-    void Start()
+    private void Awake()
     {
-        isRunning = false;
-        speed = moveSpeed;
         controller = GetComponent<CharacterController>();
         playerAnimHandler = GetComponent<PlayerAnimHandler>();
 
-        originalFocusPoint = cam.Follow;
+        currentHealth = maxHealth;
+        speed = moveSpeed;
+    }
 
+    private void Start()
+    {
+        originalFocusPoint = cam.Follow;
         cameraController = cam.GetComponent<ThirdPersonCameraController>();
         cameraTransform = cam.transform;
-
     }
+
+    #region Input
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -60,8 +63,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            if (shootingScript.isReloading == false) 
-            playerAnimHandler.AttackAnim();
+            if (!shootingScript.isReloading)
+                playerAnimHandler.AttackAnim();
         }
     }
 
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            ChangeMoveSpeed();
+            ToggleRun();
             playerAnimHandler.SetRunAnim(isRunning);
         }
     }
@@ -78,18 +81,23 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-
             isAiming = !isAiming;
             shouldFaceMoveDir = !isAiming;
-
-            cam.Follow = isAiming ? aimFocusPoint : originalFocusPoint;
-            cameraController.SetAim(isAiming);
 
             playerAnimHandler.SetAimAnim(isAiming);
         }
     }
 
-    void Update()
+    #endregion
+
+    private void Update()
+    {
+        HandleMovement();
+        HandleRotation();
+        ApplyGravity();
+    }
+
+    private void HandleMovement()
     {
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
@@ -104,7 +112,10 @@ public class PlayerController : MonoBehaviour
         controller.Move(moveDir * speed * Time.deltaTime);
 
         playerAnimHandler.SetPlayerMoveValue(moveDir.sqrMagnitude);
+    }
 
+    private void HandleRotation()
+    {
         if (isAiming)
         {
             Vector3 camForward = cameraTransform.forward;
@@ -120,28 +131,50 @@ public class PlayerController : MonoBehaviour
                 );
             }
         }
-        else if (shouldFaceMoveDir && moveDir.sqrMagnitude > 0.001f)
+        else if (shouldFaceMoveDir && moveInput.sqrMagnitude > 0.001f)
         {
-            Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, 10f * Time.deltaTime);
+            Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y);
+            Quaternion toRotation = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                toRotation,
+                10f * Time.deltaTime
+            );
         }
+    }
 
-        // deals with jumping
+    private void ApplyGravity()
+    {
+        if (controller.isGrounded && velocity.y < 0)
+            velocity.y = -2f;
+
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void ChangeMoveSpeed()
+    private void ToggleRun()
     {
-        if (isRunning)
-        {
-            speed = moveSpeed;
-            isRunning = false;
-        }
-        else
-        {
-            speed = runSpeed;
-            isRunning = true;
-        }
+        isRunning = !isRunning;
+        speed = isRunning ? runSpeed : moveSpeed;
     }
+
+    #region Damage System
+
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        Debug.Log($"Player tomou {amount} de dano. Vida atual: {currentHealth}");
+
+        if (currentHealth <= 0f)
+            Die();
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    #endregion
 }

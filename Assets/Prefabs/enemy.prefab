@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5171284131600831972}
   - component: {fileID: 5677880175119638445}
   - component: {fileID: 2621679034552912749}
+  - component: {fileID: 4526619528209675237}
   m_Layer: 6
   m_Name: enemy
   m_TagString: Untagged
@@ -155,7 +156,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 100
   moveSpeed: 5
+  gravity: -9.8
+  rotationSpeed: 10
+  target: {fileID: 0}
+  separationRadius: 2
+  separationForce: 3
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
   bar: {fileID: 5142297773465608374}
+--- !u!143 &4526619528209675237
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501742563698561278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2099576225962422245
 GameObject:
   m_ObjectHideFlags: 0

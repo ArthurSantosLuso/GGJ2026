@@ -92,13 +92,13 @@ public class StatusEffectManager : MonoBehaviour
 
     private IEnumerator SlowCoroutine(Enemy enemy, float slowMultiplier, float duration)
     {
-        float originalSpeed = enemy.moveSpeed;
-        enemy.moveSpeed *= slowMultiplier;
+        float originalSpeed = enemy.MoveSpeed;
+        enemy.MoveSpeed *= slowMultiplier;
 
         yield return new WaitForSeconds(duration);
 
         if (enemy != null)
-            enemy.moveSpeed = originalSpeed;
+            enemy.MoveSpeed = originalSpeed;
 
         EndEffect(enemy, StatusType.Slow);
     }
