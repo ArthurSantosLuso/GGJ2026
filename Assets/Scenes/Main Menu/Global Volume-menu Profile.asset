@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.FilmGrain
   active: 1
   type:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 9
   intensity:
     m_OverrideState: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
     m_Value: 37.01
   scatter:
     m_OverrideState: 1
-    m_Value: 0.527
+    m_Value: 0.599
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -111,11 +111,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   dirtTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 2800000, guid: 066504c572de5884593292cc703fe5a6, type: 3}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2
 --- !u!114 &3455560209266927838
 MonoBehaviour:
