@@ -296,6 +296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet_Ice_wTrail Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8197912218078456134, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}
+      propertyPath: damage
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8494214076117594234, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.229

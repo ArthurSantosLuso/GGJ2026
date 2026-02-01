@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet_Fire_wTrail Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8197912218078456134, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
+      propertyPath: damage
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8494214076117594234, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.48
