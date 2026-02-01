@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
             isAiming = !isAiming;
             shouldFaceMoveDir = !isAiming;
             playerAnimHandler.SetAimAnim(isAiming);
+            cam.GetComponent<ThirdPersonCameraController>().SetAim(isAiming);
         }
     }
 
