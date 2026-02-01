@@ -1432,8 +1432,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 674883392}
     - target: {fileID: 2658422601393212825, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
+      propertyPath: fireBullet
+      value: 
+      objectReference: {fileID: 7315603428168779671, guid: 077232d5a22884a488813dbcefbe9aa3, type: 3}
+    - target: {fileID: 2658422601393212825, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
+      propertyPath: slowBullet
+      value: 
+      objectReference: {fileID: 7981440011950947427, guid: 26cf9ded91ac72f48beed95dca54d8ff, type: 3}
+    - target: {fileID: 2658422601393212825, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
+      propertyPath: poisonBullet
+      value: 
+      objectReference: {fileID: 2427365751898079867, guid: decde8f97f500c44d93947cfc9edbfaf, type: 3}
+    - target: {fileID: 2658422601393212825, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
       propertyPath: currentBullet
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4805992970287906037, guid: 973d07d4e90c3ac488bae523029d182d, type: 3}
       propertyPath: cam
