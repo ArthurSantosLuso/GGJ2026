@@ -284,7 +284,7 @@ RectTransform:
   m_GameObject: {fileID: 267134567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 407124241}
@@ -292,7 +292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.297, y: -86}
+  m_AnchoredPosition: {x: -24.297, y: -200}
   m_SizeDelta: {x: 373.971, y: 81.416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267134569
@@ -907,7 +907,7 @@ RectTransform:
   m_GameObject: {fileID: 652646905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 370817011}
@@ -915,7 +915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.297, y: 271}
+  m_AnchoredPosition: {x: -24.297, y: 200}
   m_SizeDelta: {x: 373.971, y: 81.416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &652646907
@@ -1149,7 +1149,7 @@ GameObject:
   - component: {fileID: 1309151688}
   - component: {fileID: 1309151687}
   m_Layer: 5
-  m_Name: poison
+  m_Name: Poison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1164,7 +1164,7 @@ RectTransform:
   m_GameObject: {fileID: 1309151685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52049087}
@@ -1172,7 +1172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.297, y: 94}
+  m_AnchoredPosition: {x: -24.297, y: 0}
   m_SizeDelta: {x: 373.971, y: 81.416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309151687

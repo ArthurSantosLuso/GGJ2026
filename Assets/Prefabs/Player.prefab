@@ -1006,7 +1006,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f26d1cad7af29874daba609b8b8ac53d, type: 2}
+  - {fileID: 2100000, guid: 56f8ae1506c02a543a96ba261199ff72, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1830,14 +1830,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2378,9 +2378,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooting
   firePoint: {fileID: 0}
-  fireBullet: {fileID: 5029179038630605135, guid: a441f583ea0cb114aadc9e83ef85bf69, type: 3}
-  poisonBullet: {fileID: 5029179038630605135, guid: 82778656c66dff44e86afdf8c1dd7266, type: 3}
-  slowBullet: {fileID: 5029179038630605135, guid: 56f5bea18dee0ee4e9a1f933fa8ed462, type: 3}
+  fireBullet: {fileID: 7315603428168779671, guid: 077232d5a22884a488813dbcefbe9aa3, type: 3}
+  poisonBullet: {fileID: 2427365751898079867, guid: decde8f97f500c44d93947cfc9edbfaf, type: 3}
+  slowBullet: {fileID: 7981440011950947427, guid: 26cf9ded91ac72f48beed95dca54d8ff, type: 3}
   bulletSpeed: 40
   fireRate: 0.2
   viewAngle: 45
@@ -2395,7 +2395,7 @@ MonoBehaviour:
   reloadTime: 2
   isReloading: 0
   playerTransform: {fileID: 2190104211456494143}
-  currentBullet: 0
+  currentBullet: 2
 --- !u!1 &6303678802531196850
 GameObject:
   m_ObjectHideFlags: 0
